@@ -147,3 +147,28 @@ WHERE salary = (
         FROM employees
     )
 );
+
+-- =====================================================
+-- 5️⃣ Create a View for Complete Employee Details
+-- =====================================================
+
+CREATE VIEW employees_details AS
+SELECT 
+    e.name,
+    d.department_name,
+    j.job_title,
+    e.salary,
+    e.hire_date
+FROM employees e
+JOIN departments d 
+    ON e.department_id = d.department_id
+JOIN jobs j 
+    ON e.job_id = j.job_id;
+
+
+
+-- =====================================================
+-- 6️⃣ Query the View
+-- =====================================================
+
+SELECT * FROM employees_details;
