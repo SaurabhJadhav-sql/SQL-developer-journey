@@ -56,3 +56,94 @@ INSERT INTO employees VALUES
 (2, 'Priya', 60000, 2, 2, '2021-06-10'),
 (3, 'Rahul', 85000, 1, 1, '2020-03-20'),
 (4, 'Sneha', 50000, 3, 3, '2023-02-05');
+
+-- ==========================================
+-- Show employees with their department name
+-- ==========================================
+
+SELECT e.name,
+       d.department_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id;
+
+-- ==========================================
+-- Show employees with job title
+-- ==========================================
+
+SELECT e.name,
+       j.job_title,
+FROM employees e
+JOIN jobs j
+ON e.job_id = j.job_id;
+
+-- ==========================================
+-- Average salary per department
+-- ==========================================
+
+SELECT d.department_name,
+       AVG(e.salary) AS avg_salary
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id
+GROUP BY d.department_name;
+
+-- ==========================================
+-- Highest paid employee
+-- ==========================================
+
+SELECT name, salary
+FROM employees
+WHERE salary = (SELECT MAX(salary) FROM employees);
+
+=====================================================
+-- 1️⃣ Employees hired after 2021
+-- =====================================================
+
+SELECT name, hire_date
+FROM employees
+WHERE hire_date >= '2022-01-01';
+
+
+
+-- =====================================================
+-- 2️⃣ Department name and total salary per department
+-- =====================================================
+
+SELECT 
+    d.department_name,
+    SUM(e.salary) AS total_salary
+FROM employees e
+JOIN departments d 
+    ON e.department_id = d.department_id
+GROUP BY d.department_name;
+
+
+
+-- =====================================================
+-- 3️⃣ Second highest salary in the company
+-- =====================================================
+
+SELECT MAX(salary) AS second_max_salary
+FROM employees
+WHERE salary < (
+    SELECT MAX(salary) 
+    FROM employees
+);
+
+
+
+-- =====================================================
+-- 4️⃣ Employee(s) earning the second highest salary
+-- =====================================================
+
+SELECT name, salary
+FROM employees
+WHERE salary = (
+    SELECT MAX(salary)
+    FROM employees
+    WHERE salary < (
+        SELECT MAX(salary) 
+        FROM employees
+    )
+);
