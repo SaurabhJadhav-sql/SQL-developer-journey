@@ -3,7 +3,6 @@
 This folder will contain complete database projects such as:
 
 - Employee Management System
-- # SQL Mini Projects
 
 This directory contains structured SQL database projects designed to demonstrate practical database design and query skills using PostgreSQL.
 
