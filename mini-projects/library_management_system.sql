@@ -123,6 +123,47 @@ ON b.member_id = m.member_id;
 
 
 
+--Count Total books per category
+Select category,Count(*) AS total_books
+From Books
+Group by Category
+
+
+    
+--Find total copies of books per category
+Select Category,Sum(Total_Copies) As Total_Copies
+From Books 
+Group by Category 
+
+
+    
+--Find books published after 2000
+Select Title,Published_year
+From Books
+Where Published_Year > 2000;
+
+
+
+--Find Books with less than two available copies
+Select Title,available_copies
+From Books
+Where available_copies < 2;
+
+
+
+--Count total library members
+Select Count(*) As total_available_members
+From Members  
+
+
+    
+--Find members who joined in 2023
+Select Name,Membership_Date
+From Members
+Where Extract(Year From membership_date) = 2023;
+
+
+
 -- =====================================================
 -- Debug Queries (Check Data)
 -- =====================================================
